@@ -14,9 +14,11 @@ import java.io.InputStreamReader;
 public class Repl {
     private static final String prmt = ">> ";
     public static void main(String[] args) throws IOException {
-        System.out.print(prmt);
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        String line = reader.readLine();
-        System.out.println(line);
+        while (true) {
+            System.out.print(prmt);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+            String line = reader.readLine();
+            System.out.println(line);
+        }
     }
 }
