@@ -1,5 +1,7 @@
 package jisp.ast;
 
+import java.util.List;
+
 /**
  * TODO
  *
@@ -8,5 +10,5 @@ package jisp.ast;
  * @since 2020/07/23 15:49
  */
 public interface Lambda {
-    double apply(Object ... args);
+    double apply(List<Object> args);
 }

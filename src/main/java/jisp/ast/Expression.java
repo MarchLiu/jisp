@@ -23,11 +23,11 @@ public class Expression implements Element {
     public double eval(Env env) throws ParserException {
         String funcName = elements.get(0).toString();
         Lambda func = (Lambda) env.get(funcName);
-        List<Double> params = new ArrayList<>();
+        List<Object> params = new ArrayList<>();
         for(int i = 1; i< elements.size(); i++){
             double arg = ((Element)elements.get(i)).eval(env);
             params.add(arg);
         }
-        return func.apply(params.toArray());
+        return func.apply(params);
     }
 }

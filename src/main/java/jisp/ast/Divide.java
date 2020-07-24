@@ -1,5 +1,7 @@
 package jisp.ast;
 
+import java.util.List;
+
 /**
  * TODO
  *
@@ -9,10 +11,10 @@ package jisp.ast;
  */
 public class Divide implements Lambda {
     @Override
-    public double apply(Object... args) {
-        double result = (Double) args[0];
-        for(int i = 1; i<args.length; i++){
-            result /= (Double)args[i];
+    public double apply(List<Object> args) {
+        double result = (Double) args.get(0);
+        for(Object item: args.subList(1, args.size())){
+            result /= (Double)item;
         }
         return result;
     }
