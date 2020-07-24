@@ -34,8 +34,11 @@ public class Repl {
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
             String line = reader.readLine();
             try {
-                Element element = (Element) parser.parse(line);
-                System.out.println(element.eval(env));
+                Object data = parser.parse(line);
+                if(data instanceof Element) {
+                    data = ((Element)data).eval(env);
+                }
+                System.out.println(data);
             } catch (ParsecException err) {
                 System.out.println(String.format("invalid syntax [%s] error [%s]", line, err.getMessage()));
             } catch (ParserException err) {
