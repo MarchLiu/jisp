@@ -20,14 +20,8 @@ public class Expression implements Element {
     }
 
     @Override
-    public double eval(Env env) throws ParserException {
-        String funcName = elements.get(0).toString();
-        Lambda func = (Lambda) env.get(funcName);
-        List<Object> params = new ArrayList<>();
-        for(int i = 1; i< elements.size(); i++){
-            double arg = ((Element)elements.get(i)).eval(env);
-            params.add(arg);
-        }
-        return func.apply(params);
+    public Object eval(Env env) throws ParserException {
+        Lambda func = (Lambda)((Element)elements.get(0)).eval(env);
+        return func.apply(env, elements.subList(1, elements.size()));
     }
 }

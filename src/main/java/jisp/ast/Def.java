@@ -9,15 +9,15 @@ import java.util.List;
  *
  * @author mars
  * @version 1.0.0
- * @since 2020/07/23 15:50
+ * @since 2020/07/26 17:04
  */
-public class Add implements Lambda {
+public class Def implements Lambda {
     @Override
     public Object apply(Env env, List<Object> args) throws ParserException {
-        double result = 0;
-        for (Object item: args) {
-            result += (Double) extractValue(env, item);
-        }
-        return result;
+        var name = ((Name)args.get(0)).getName();
+        var value = extractValue(env, args.get(1));
+        env.put(name, value);
+        return value;
     }
+
 }

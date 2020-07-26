@@ -28,22 +28,22 @@ public class ExpressionTest {
 
     @Test
     public void testAdd() throws EOFException, ParserException {
-        String source = "(+ 1 2 3)";
-        State<Character> state = new TxtState(source);
-        Parser parser = new Parser();
-        Object ast = parser.parse(state);
-        Double result = ((Element) ast).eval(env);
-        Double expect = 6d;
+        var source = "(+ 1 2 3)";
+        var state = new TxtState(source);
+        var parser = new Parser();
+        var ast = parser.parse(state);
+        Object result = ((Element) ast).eval(env);
+        var expect = 6d;
         Assert.assertEquals(expect, result);
     }
 
     @Test
     public void testProduct() throws EOFException, ParserException {
         String source = "(* 1 2 3)";
-        State<Character> state = new TxtState(source);
+        var state = new TxtState(source);
         Parser parser = new Parser();
         Object ast = parser.parse(state);
-        Double result = ((Element) ast).eval(env);
+        Double result = (Double) ((Element) ast).eval(env);
         Double expect = 6d;
         Assert.assertEquals(expect, result);
     }
@@ -51,10 +51,10 @@ public class ExpressionTest {
     @Test
     public void testPloy() throws EOFException, ParserException {
         String source = "(* 5 (+ 2 3))";
-        State<Character> state = new TxtState(source);
+        var state = new TxtState(source);
         Parser parser = new Parser();
         Object ast = parser.parse(state);
-        Double result = ((Element) ast).eval(env);
+        Double result = (Double) ((Element) ast).eval(env);
         Double expect = 25d;
         Assert.assertEquals(expect, result);
     }
@@ -62,10 +62,10 @@ public class ExpressionTest {
     @Test
     public void testMorePloy() throws EOFException, ParserException {
         String source = "(* (* 3 3) (+ 2 3))";
-        State<Character> state = new TxtState(source);
+        var state = new TxtState(source);
         Parser parser = new Parser();
         Object ast = parser.parse(state);
-        Double result = ((Element) ast).eval(env);
+        Double result = (Double) ((Element) ast).eval(env);
         Double expect = 45d;
         Assert.assertEquals(expect, result);
     }

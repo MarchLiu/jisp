@@ -18,15 +18,15 @@ import java.io.EOFException;
 public class StringTest {
     @Test
     public void testSimple() throws EOFException {
-        Parser parser = new Parser();
-        State<Character> state = new TxtState("\"this is a string\"");
+        var parser = new Parser();
+        var state = new TxtState("\"this is a string\"");
         Assert.assertEquals(parser.parse(state), "this is a string");
     }
 
     @Test
     public void testEscape() throws EOFException {
-        Parser parser = new Parser();
-        State<Character> state = new TxtState("\"this is a string what is \\\"I'm a string\\\"\"");
+        var parser = new Parser();
+        var state = new TxtState("\"this is a string what is \\\"I'm a string\\\"\"");
         Assert.assertEquals(parser.parse(state), "this is a string what is \"I'm a string\"");
     }
 }

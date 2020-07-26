@@ -20,7 +20,7 @@ public class NumberParser implements Parsec<Object, Character> {
     private final Parsec<String, Character> parser = decimal();
     @Override
     public NumberElement parse(State<Character> s) throws EOFException, ParsecException {
-        String data = parser.parse(s);
+        var data = parser.parse(s);
         return new NumberElement(Double.parseDouble(data));
     }
 }

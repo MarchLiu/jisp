@@ -15,7 +15,7 @@ public class NumberElement implements Element {
     }
 
     @Override
-    public double eval(Env env) {
+    public Object eval(Env env) {
         return value;
     }
 }

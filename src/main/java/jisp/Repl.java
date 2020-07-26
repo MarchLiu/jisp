@@ -20,6 +20,7 @@ import java.io.InputStreamReader;
 public class Repl {
     private final static Env env = new Env();
     static {
+        env.put("def", new Def());
         env.put("+", new Add());
         env.put("-", new Sub());
         env.put("*", new Product());

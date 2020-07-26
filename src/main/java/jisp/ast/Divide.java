@@ -1,5 +1,7 @@
 package jisp.ast;
 
+import jisp.ParserException;
+
 import java.util.List;
 
 /**
@@ -11,9 +13,9 @@ import java.util.List;
  */
 public class Divide implements Lambda {
     @Override
-    public double apply(List<Object> args) {
-        double result = (Double) args.get(0);
-        for(Object item: args.subList(1, args.size())){
+    public Object apply(Env env, List<Object> args) throws ParserException {
+        double result = (Double) extractValue(env, args.get(0));
+        for(Object item: prepare(env, args.subList(1, args.size()))){
             result /= (Double)item;
         }
         return result;

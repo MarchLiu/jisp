@@ -10,5 +10,5 @@ import jisp.ParserException;
  * @since 2020/07/23 15:48
  */
 public interface Element {
-    double eval(Env env) throws ParserException;
+    Object eval(Env env) throws ParserException;
 }

@@ -1,5 +1,7 @@
 package jisp.ast;
 
+import jisp.ParserException;
+
 import java.util.List;
 
 /**
@@ -11,8 +13,8 @@ import java.util.List;
  */
 public class Sub implements Lambda {
     @Override
-    public double apply(List<Object> args) {
-        double result = (Double) args.get(0);
+    public Object apply(Env env, List<Object> args) throws ParserException {
+        double result = (Double) extractValue(env, args.get(0));
         for (Object item: args.subList(1, args.size())) {
             result -= (Double) item;
         }

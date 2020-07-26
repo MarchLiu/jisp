@@ -3,13 +3,14 @@ package jisp.parsers;
 import jaskell.parsec.ParsecException;
 import jaskell.parsec.common.Parsec;
 import jaskell.parsec.common.State;
-import jisp.ast.Element;
+import jisp.ast.Name;
 
 import java.io.EOFException;
 import java.util.function.Predicate;
 
-import static jaskell.parsec.common.Combinator.*;
-import static jaskell.parsec.common.Atom.*;
+import static jaskell.parsec.common.Atom.is;
+import static jaskell.parsec.common.Atom.pack;
+import static jaskell.parsec.common.Combinator.many1;
 import static jaskell.parsec.common.Txt.joining;
 
 /**
@@ -21,10 +22,11 @@ import static jaskell.parsec.common.Txt.joining;
  */
 public class NameParser implements Parsec<Object, Character> {
     private final Predicate<Character> predicate = c -> !(c == ')' || Character.isWhitespace(c));
-    private final Parsec<String, Character> parser = many1(is(predicate)).bind(joining());
+    private final Parsec<Name, Character> parser = many1(is(predicate)).bind(joining())
+            .bind(name -> pack(new Name(name)));
 
     @Override
-    public String parse(State<Character> s) throws EOFException, ParsecException {
+    public Name parse(State<Character> s) throws EOFException, ParsecException {
         return parser.parse(s);
     }
 }

@@ -1,5 +1,7 @@
 package jisp.ast;
 
+import jisp.ParserException;
+
 import java.util.List;
 
 /**
@@ -11,9 +13,9 @@ import java.util.List;
  */
 public class Product implements Lambda {
     @Override
-    public double apply(List<Object> args) {
+    public Object apply(Env env, List<Object> args) throws ParserException {
         double result = 1;
-        for(Object item : args){
+        for(Object item : prepare(env, args)){
             result *= (Double) item;
         }
         return result;

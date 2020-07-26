@@ -5,12 +5,9 @@ import jaskell.parsec.common.Parsec;
 import jaskell.parsec.common.State;
 
 import java.io.EOFException;
-import java.util.function.Predicate;
 
-import static jaskell.parsec.common.Atom.is;
 import static jaskell.parsec.common.Combinator.*;
-import static jaskell.parsec.common.Txt.ch;
-import static jaskell.parsec.common.Txt.joining;
+import static jaskell.parsec.common.Txt.*;
 
 /**
  * TODO
@@ -20,8 +17,9 @@ import static jaskell.parsec.common.Txt.joining;
  * @since 2020/07/24 16:34
  */
 public class StringParser implements Parsec<Object, Character> {
-    private final Predicate<Character> predicate = c -> !(c == '"' || c == '\\');
-    private final Parsec<Character, Character> character = attempt(is(predicate));
+//    private final Predicate<Character> predicate = c -> !(c == '"' || c == '\\');
+//    private final Parsec<Character, Character> character = attempt(is(predicate));
+    private final Parsec<Character, Character> character = attempt(chNone("\"\\"));
     private final Parsec<Character, Character> escapeCharacter = ch('\\').then(s -> {
         Character c = s.next();
         switch (c) {

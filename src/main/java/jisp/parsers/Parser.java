@@ -19,7 +19,7 @@ import static jaskell.parsec.common.Combinator.choice;
 public class Parser implements Parsec<Object, Character> {
     @Override
     public Object parse(State<Character> s) throws EOFException, ParsecException {
-        Parsec<Object, Character> parser = choice(attempt(new ExprParser()),
+        var parser = choice(attempt(new ExprParser()),
                 attempt(new NumberParser()),
                 attempt(new StringParser()),
                 new NameParser());
