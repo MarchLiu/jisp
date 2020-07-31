@@ -16,7 +16,7 @@ public class Product implements Lambda {
     public Object apply(Env env, List<Object> args) throws ParserException {
         double result = 1;
         for(Object item : prepare(env, args)){
-            result *= (Double) item;
+            result *= ((Number)env.eval(item)).doubleValue();
         }
         return result;
     }

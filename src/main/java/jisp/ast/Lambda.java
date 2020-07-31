@@ -25,13 +25,7 @@ public interface Lambda {
         return result;
     }
 
-    default Object extractValue(Env env, Object data) throws ParserException {
-        if(data instanceof Element) {
-            return ((Element) data).eval(env);
-        } else {
-            return data;
-        }
-    }
+
 
     Object apply(Env env, List<Object> args) throws ParserException;
 }

@@ -50,4 +50,12 @@ public class Env {
             return findOut(name);
         }
     }
+
+    public Object eval(Object data) throws ParserException {
+        if(data instanceof Element) {
+            return ((Element) data).eval(this);
+        } else {
+            return data;
+        }
+    }
 }

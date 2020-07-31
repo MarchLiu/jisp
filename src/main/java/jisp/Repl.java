@@ -1,9 +1,7 @@
 package jisp;
 
 import jaskell.parsec.ParsecException;
-import jaskell.parsec.common.Parsec;
 import jisp.ast.*;
-import jisp.parsers.NumberParser;
 import jisp.parsers.Parser;
 
 import java.io.BufferedReader;
@@ -25,6 +23,12 @@ public class Repl {
         env.put("-", new Sub());
         env.put("*", new Product());
         env.put("/", new Divide());
+        env.put("==", new Eq());
+        env.put("!=", new NotEq());
+        env.put(">", new Great());
+        env.put("<", new Less());
+        env.put(">=", new GreatOrEquals());
+        env.put("<=", new LessOrEquals());
     }
 
     private static final String prmt = ">> ";

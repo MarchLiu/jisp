@@ -9,15 +9,16 @@ import java.util.List;
  *
  * @author mars
  * @version 1.0.0
- * @since 2020/07/23 15:50
+ * @since 2020/07/31 16:28
  */
-public class Add implements Lambda {
+public class And implements Lambda {
     @Override
     public Object apply(Env env, List<Object> args) throws ParserException {
-        double result = 0;
-        for (Object item: args) {
-            result += ((Number) env.eval(item)).doubleValue();
+        for (Object arg: args) {
+            if(!IsTrue.isTrue(env.eval(arg))) {
+                return false;
+            }
         }
-        return result;
+        return true;
     }
 }

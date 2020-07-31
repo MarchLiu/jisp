@@ -14,9 +14,9 @@ import java.util.List;
 public class Divide implements Lambda {
     @Override
     public Object apply(Env env, List<Object> args) throws ParserException {
-        double result = (Double) extractValue(env, args.get(0));
+        double result = ((Number) env.eval(args.get(0))).doubleValue();
         for(Object item: prepare(env, args.subList(1, args.size()))){
-            result /= (Double)item;
+            result /= ((Number)item).doubleValue();
         }
         return result;
     }
