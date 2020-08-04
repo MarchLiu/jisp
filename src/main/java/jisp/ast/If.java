@@ -1,5 +1,6 @@
 package jisp.ast;
 
+import jaskell.parsec.common.Is;
 import jisp.ParserException;
 
 import java.util.List;
@@ -20,8 +21,8 @@ public class If implements Lambda {
                             "invalid statement (if %s) [size is %d], parameters count of if must always 2 or 3",
                             args, args.size()));
         }
-        var cond = env.eval(args.get(0));
-        if((Boolean) cond){
+        var cond = IsTrue.isTrue(env.eval(args.get(0)));
+        if(cond){
             return env.eval(args.get(1));
         } else {
             if (args.size()==3){
