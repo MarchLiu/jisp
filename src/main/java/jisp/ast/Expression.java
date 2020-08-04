@@ -15,6 +15,10 @@ import java.util.List;
 public class Expression implements Element {
     private final List<Object> elements = new ArrayList<>();
 
+    public List<Object> getElements() {
+        return elements;
+    }
+
     public Expression(List<Object> elements) {
         this.elements.addAll(elements);
     }

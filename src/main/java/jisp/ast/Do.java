@@ -14,9 +14,12 @@ import java.util.List;
 public class Do implements Lambda {
     @Override
     public Object apply(Env env, List<Object> args) throws ParserException {
-        for(Object arg: args.subList(0, args.size()-1)) {
-            env.eval(arg);
+        var environment = new Env();
+        environment.setGlobal(env);
+
+        for (Object arg : args.subList(0, args.size() - 1)) {
+            environment.eval(arg);
         }
-        return env.eval(args.get(args.size()-1));
+        return environment.eval(args.get(args.size() - 1));
     }
 }
