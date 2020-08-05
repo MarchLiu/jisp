@@ -1,6 +1,5 @@
 package jisp.ast;
 
-import jaskell.parsec.common.Is;
 import jisp.ParserException;
 
 import java.util.List;
