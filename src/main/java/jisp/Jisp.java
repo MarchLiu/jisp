@@ -35,6 +35,11 @@ public class Jisp extends Env {
         this.put("-", new Sub());
         this.put("*", new Product());
         this.put("/", new Divide());
+
+        this.put("list", new ListExpr());
+        this.put("first", new First());
+        this.put("last", new Last());
+        this.put("rest", new Rest());
     }
 
     public Parser getParser() {
