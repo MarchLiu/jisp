@@ -15,52 +15,28 @@ import java.io.EOFException;
  * @since 2020/08/05 16:18
  */
 public class FnTest {
-    private final Env env;
-    private final Parser parser = new Parser();
-
-    public FnTest() {
-        env = new Env();
-        env.put("def", new Def());
-        env.put("if", new If());
-
-        env.put("fn", new Fn());
-        env.put("recur", new Recur());
-
-        env.put("and", new And());
-        env.put("or", new Or());
-        env.put("==", new Eq());
-        env.put("!=", new NotEq());
-        env.put(">", new Great());
-        env.put("<", new Less());
-        env.put(">=", new GreatOrEquals());
-        env.put("<=", new LessOrEquals());
-
-        env.put("+", new Add());
-        env.put("-", new Sub());
-        env.put("*", new Product());
-        env.put("/", new Divide());
-    }
+    private final Jisp jisp = new Jisp();
 
     @Test
     public void testDefine() throws EOFException, ParserException {
-        env.eval(parser.parse("(def add (fn (x y) (+ x y)))"));
+        jisp.parse("(def add (fn (x y) (+ x y)))");
 
-        Assert.assertEquals(9.42, env.eval(parser.parse("(add 3.14 6.28)")));
+        Assert.assertEquals(9.42, jisp.parse("(add 3.14 6.28)"));
     }
 
     @Test
     public void testRecur() throws EOFException, ParserException {
-        env.eval(parser.parse("(def increment (fn (x) (if (< x 10) (recur (* 2 x)) x)))"));
+        jisp.parse("(def increment (fn (x) (if (< x 10) (recur (* 2 x)) x)))");
 
-        Assert.assertEquals(16.0, env.eval(parser.parse("(increment 2)")));
+        Assert.assertEquals(16.0, jisp.parse("(increment 2)"));
     }
 
     @Test
     public void testStatic() throws EOFException, ParserException {
-        env.eval(parser.parse("(def add (fn (x y) (+ x y)))"));
+        jisp.parse("(def add (fn (x y) (+ x y)))");
 
-        env.eval(parser.parse("(def step6 (fn (x) (if (< x 10) (recur (add 6 x)) x)))"));
+        jisp.parse("(def step6 (fn (x) (if (< x 10) (recur (add 6 x)) x)))");
 
-        Assert.assertEquals(14.0, env.eval(parser.parse("(step6 2)")));
+        Assert.assertEquals(14.0, jisp.parse("(step6 2)"));
     }
 }
