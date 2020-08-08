@@ -15,15 +15,15 @@ import java.util.List;
 public class Cons implements Lambda {
     @Override
     public Object apply(Env env, List<Object> args) throws ParserException {
-        if(args.size() != 2 || !(args.get(1) instanceof List)) {
+        if(args.size() != 2 || !isList(args.get(1))) {
             throw new ParserException(String.format("expect (cons x seq) but get (cons %s)", args));
         }
 
         var  list = new ArrayList<>();
-        list.add(env.eval(args.get(0)));
-        for(var arg: (List<Object>)args.get(1)){
+        for (var arg : elements(args.get(1))) {
             list.add(env.eval(arg));
         }
+
         return list;
     }
 }

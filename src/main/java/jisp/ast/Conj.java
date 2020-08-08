@@ -15,14 +15,17 @@ import java.util.List;
 public class Conj implements Lambda {
     @Override
     public Object apply(Env env, List<Object> args) throws ParserException {
-        if(args.size() != 2 || !(args.get(0) instanceof List)) {
-            throw new ParserException(String.format("expect (conj seq x) but get (conj %s)", args));
+        if(args.size() != 2 || !isList(args.get(0))) {
+            throw new ParserException(String.format("expect (cons x seq) but get (cons %s)", args));
         }
 
         var  list = new ArrayList<>();
-        for(var arg: (List<Object>)args.get(0)){
-            list.add(env.eval(arg));
+        if(args.get(0) instanceof List) {
+            for (var arg : elements(args.get(0))) {
+                list.add(env.eval(arg));
+            }
         }
+
         list.add(env.eval(args.get(1)));
         return list;
     }

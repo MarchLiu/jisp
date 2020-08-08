@@ -18,22 +18,16 @@ public class First implements Lambda {
             throw new ParserException(String.format("head function only accept one parameter but [%s]", args));
         }
         var param = env.eval(args.get(0));
-        if (param instanceof Expression) {
-            var elems = ((Expression) param).getElements();
-            if (elems.size() > 0) {
-                return elems.get(0);
-            } else {
-                return null;
-            }
+
+        if (!isList(param)) {
+            throw new ParserException(String.format("(head %s) unsupported", param));
         }
-        if (param instanceof List) {
-            var elems = (List) param;
-            if(elems.size() > 0) {
-                return elems.get(0);
-            } else {
-                return null;
-            }
+
+        var elems = elements(param);
+        if (elems.size() > 0) {
+            return elems.get(0);
+        } else {
+            return null;
         }
-        throw new ParserException(String.format("(head %s) unsupported", param));
     }
 }
