@@ -24,9 +24,9 @@ public class Rest implements Lambda {
         }
         var elems = elements(param);
         if (elems.size() > 0) {
-            return elems.subList(1, elems.size());
+            return Quote.fromList(elems.subList(1, elems.size()));
         } else {
-            return new Quote(new Expression(new ArrayList<>()));
+            return Quote.fromList(new ArrayList<>());
         }
     }
 }

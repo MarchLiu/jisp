@@ -17,6 +17,7 @@ public class First implements Lambda {
         if (args.size() != 1) {
             throw new ParserException(String.format("head function only accept one parameter but [%s]", args));
         }
+
         var param = env.eval(args.get(0));
 
         if (!isList(param)) {

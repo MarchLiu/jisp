@@ -26,4 +26,8 @@ public class Quote implements Element {
     public Object eval(Env env) throws ParserException {
         return value;
     }
+
+    public static Quote fromList(List<Object> elements) {
+        return new Quote(new Expression(elements));
+    }
 }
