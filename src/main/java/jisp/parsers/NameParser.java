@@ -20,9 +20,9 @@ import static jaskell.parsec.common.Txt.joining;
  * @version 1.0.0
  * @since 2020/07/23 15:48
  */
-public class NameParser implements Parsec<Object, Character> {
+public class NameParser implements Parsec<Character, Object> {
     private final Predicate<Character> predicate = c -> !(c == ')' || Character.isWhitespace(c));
-    private final Parsec<Name, Character> parser = many1(is(predicate)).bind(joining())
+    private final Parsec<Character, Name> parser = many1(is(predicate)).bind(joining())
             .bind(name -> pack(new Name(name)));
 
     @Override

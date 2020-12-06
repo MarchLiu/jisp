@@ -17,7 +17,7 @@ import static jaskell.parsec.common.Txt.ch;
  * @version 1.0.0
  * @since 2020/08/05 19:36
  */
-public class QuoteParser implements Parsec<Object, Character> {
+public class QuoteParser implements Parsec<Character, Object> {
     @Override
     public Object parse(State<Character> s) throws EOFException, ParsecException {
         var parser = new Parser();

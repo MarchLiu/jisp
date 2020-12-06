@@ -16,7 +16,7 @@ import static jaskell.parsec.common.Txt.*;
  * @version 1.0.0
  * @since 2020/07/24 16:34
  */
-public class StringParser implements Parsec<Object, Character> {
+public class StringParser implements Parsec<Character, Object> {
 //    private final Predicate<Character> predicate = c -> !(c == '"' || c == '\\');
 //    private final Parsec<Character, Character> character = attempt(is(predicate));
     private final Parsec<Character, Character> character = attempt(chNone("\"\\"));
@@ -35,7 +35,7 @@ public class StringParser implements Parsec<Object, Character> {
                 throw s.trap(String.format("invalid char  \\%c", c));
         }
     });
-    private final Parsec<String, Character> parser = between(ch('"'), ch('"'),
+    private final Parsec<Character, String> parser = between(ch('"'), ch('"'),
             many(choice(character, escapeCharacter))).bind(joining());
 
     @Override
